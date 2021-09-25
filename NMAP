@@ -1,0 +1,95 @@
+# Project_One_Class_Python
+Project_One_Class_Python
+   
+#!/usr/bin/python3
+import nmap3
+from datetime import datetime
+from termcolor import colored
+
+msg1 = colored('_', 'green', attrs=['blink'])
+msg2 = colored('_', 'cyan')
+nmap_start=datetime.now()
+
+target = '11.11.11.171'
+
+pynmap = nmap3.Nmap()
+argscan = pynmap.scan_top_ports(target, args='-A -sC -n -T5')
+
+for _info in argscan[target]:
+    print('[' + msg1 + ']', _info['portid'], _info ['protocol'], _info['state'],_info['reason'])
+
+
+    for chave, valor in _info['service'].items():
+        print('--[' + msg2 + ']', chave, valor)
+
+    print()
+
+nmap_end = datetime.now()
+nmap_time = nmap_end - nmap_start
+print('[' + msg1 + ']', 'Tempo de execucao', nmap_time)
+
+print()
+
+for chave, valor in argscan['runtime'].items():
+    if chave =='timestr':
+        _time = valor
+        print('[*]',_time)
+    
+    if chave == 'summary':
+        _sum = valor
+        print('[*]',_sum)
+        
+        import nmap3
+from datetime import datetime
+from termcolor import colored
+
+msg1 = colored('_', 'green', attrs=['blink'])
+msg2 = colored('_', 'cyan')
+nmap_start=datetime.now()
+
+target = '11.11.11.171'
+
+pynmap = nmap3.NmapScanTechniques()
+finscan = pynmap.nmap_fin_scan(target)
+
+print('Porta...:', finscan['ports']['portid'])
+print('Protocolo ...:', finscan['ports']['protocol'])
+print('Servico.', finscan['ports']['service']['name']) 
+print('Estado.:', finscan['ports']['state']['state'])
+
+nmap_end = datetime.now()
+nmap_time = nmap_end - nmap_start
+print('[' + msg1 + ']', 'Tempo de execucao', nmap_time)
+
+print()
+
+import nmap3
+import json
+
+pynmap = nmap3.NmapScanTechniques()
+
+target = '11.11.11.171'
+
+vanilla = pynmap.nmap_tcp_scan(target)
+vanilla_json = json.dumps(vanilla, indent = 6)
+
+print(vanilla_json)
+
+import nmap3
+from datetime import datetime
+from termcolor import colored
+
+msg1 = colored('_', 'green', attrs=['blink'])
+nmap_start=datetime.now()
+
+target = '11.11.11.171'
+
+pynmap = nmap3.NmapScanTechniques()
+vanilla = pynmap.nmap_tcp_scan(target)
+
+for _info in vanilla[target]:
+    print('[' + msg1 + ']', _info['portid'], _info ['protocol'], _info['state'],_info['reason'])
+
+nmap_end = datetime.now()
+nmap_time = nmap_end - nmap_start
+print('[' + msg1 + ']', 'Tempo de execucao', nmap_time)
